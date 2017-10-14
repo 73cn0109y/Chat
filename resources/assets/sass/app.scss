@@ -1,0 +1,63 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700');
+// Variables
+@import 'variables';
+// Framework
+@import 'framework';
+
+html,
+body,
+.app-root {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: $back-color;
+	color: $color;
+	box-sizing: border-box;
+	overflow: hidden;
+	font-family: 'Roboto', sans-serif;
+
+	> .container {
+		margin-top: 1em;
+	}
+}
+
+.row {
+	align-items: center;
+}
+
+nav > .nav-group > .v-dropdown {
+	&.open > .dropdown-button {
+		background-color: darken($theme-primary-color, 5%);
+	}
+
+	> .dropdown-button {
+		padding: 0 1em;
+		border: 0;
+		transition: background-color ease-in-out 0.25s;
+
+		&:hover {
+			background-color: darken($theme-primary-color, 5%);
+		}
+
+		&:active {
+			background-color: darken($theme-primary-color, 15%);
+		}
+
+		.fa {
+			margin-left: 0.5em;
+		}
+	}
+
+	> .dropdown-content {
+		background-color: #FEFEFE;
+		color: #111111;
+	}
+}
+
+*,
+::after,
+::before {
+	box-sizing: inherit;
+}

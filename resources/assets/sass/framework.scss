@@ -1,0 +1,514 @@
+@import 'variables';
+
+input,
+textarea,
+select,
+button {
+	font: inherit;
+}
+
+.form-control {
+	display: block;
+	border: 0;
+	border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+	background-color: transparent;
+	padding: 0.75em 0.5em;
+	margin: 0.25em auto;
+	width: 100%;
+	outline: none;
+	font: inherit;
+	font-size: 0.9em;
+	transition: border-color ease-in-out 0.25s;
+
+	&:focus {
+		border-color: transparentize($theme-primary-color, 0.25);
+
+		&.inverse {
+			border-color: rgba(0, 0, 0, 0.2);
+		}
+	}
+
+	&::-webkit-input-placeholder {
+		color: rgba(255, 255, 255, 0.5);
+	}
+}
+
+.form-group {
+	margin: 0.5em 0;
+}
+
+.form-control-label {
+	display: block;
+	text-align: left;
+	font-size: 0.9em;
+	font-weight: 500;
+}
+
+.form-control-sub-label {
+	display: block;
+	text-align: left;
+	font-size: 0.75em;
+	color: #CCC;
+}
+
+.form-control-inline {
+	display: inline-block;
+}
+
+input[type="checkbox"].form-control {
+	display: none;
+
+	&:checked + label {
+		&::before {
+			border-color: $theme-primary-color;
+			background-color: $theme-primary-color;
+		}
+
+		&::after {
+			opacity: 1;
+		}
+	}
+
+	+ label {
+		position: relative;
+		cursor: pointer;
+		padding: 0 0.5em;
+
+		&::before,
+		&::after {
+			position: absolute;
+			top: 0.1em;
+			right: 1.1em;
+			display: block;
+			content: '';
+			width: 1.25em;
+			height: 1.25em;
+		}
+
+		&::before {
+			border: solid 1px rgba(0, 0, 0, 0.25);
+			transition: background-color ease-in-out 0.25s, border-color ease-in-out 0.25s;
+		}
+
+		&::after {
+			right: 1.5em;
+			top: 0.15em;
+			width: 0.4em;
+			height: 0.875em;
+			border: solid 2px white;
+			border-top: none;
+			border-left: none;
+			transform: rotate(40deg);
+			opacity: 0;
+			transition: opacity ease-in-out 0.25s;
+		}
+	}
+}
+
+input[type="radio"] {
+	display: block;
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+
+	+ label {
+		display: inline-block;
+		position: relative;
+		text-align: center;
+		margin-right: 1em;
+		cursor: pointer;
+
+		&::before {
+			position: relative;
+			top: 0.1em;
+			display: block;
+			content: '';
+			width: 1.5em;
+			height: 1.5em;
+			margin: 0.5em auto;
+			line-height: 1.5em;
+			border-radius: 50%;
+			background-color: transparentize($theme-primary-color, 0.5);
+		}
+
+		&::after {
+			position: absolute;
+			display: block;
+			content: '';
+			top: 0.35em;
+			left: 50%;
+			margin-left: -0.25em;
+			width: 0.5em;
+			height: 0.8em;
+			border: solid $theme-primary-color;
+			border-width: 0 3px 3px 0;
+			transform: scale(0) rotate(45deg);
+			opacity: 0;
+			transition: all ease-in-out 0.25s;
+		}
+	}
+
+	&:checked + label {
+		&::before {
+			background-color: transparentize($theme-primary-color, 0.25);
+		}
+
+		&::after {
+			transform: scale(1) rotate(45deg);
+			opacity: 1;
+		}
+	}
+}
+
+option {
+	font-size: 1rem;
+	color: black;
+}
+
+.btn {
+	display: inline-block;
+	padding: 0.75em 2em;
+	margin: 0 0.5em;
+	font-weight: 500;
+	font-size: 0.9em;
+	background-color: $btn-primary;
+	text-align: center;
+	color: white;
+	border: 0;
+	outline: none;
+	cursor: pointer;
+	transition: all ease-in-out 0.25s;
+
+	&:hover {
+		background-color: darken($btn-primary, 5%);
+	}
+
+	&:active {
+		background-color: darken($btn-primary, 15%);
+	}
+
+	&.icon-before > .fa {
+		margin-right: 0.5em;
+	}
+
+	&.icon-after > .fa {
+		margin-left: 0.5em;
+	}
+
+	&.btn-underline {
+		background-color: transparent;
+		border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+		border-radius: 0;
+		color: inherit;
+		padding: 0.25em;
+		font-weight: bold;
+		letter-spacing: 0.05em;
+
+		&:hover {
+			border-color: rgba(0, 0, 0, 0.2);
+		}
+
+		&:active {
+			border-color: rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	@each $type, $color in $btn-types {
+		&.btn-#{$type} {
+			background-color: $color;
+
+			&:hover {
+				background-color: darken($color, 5%);
+			}
+
+			&:active {
+				background-color: darken($color, 15%);
+			}
+		}
+	}
+
+	&.btn-block {
+		display: block;
+	}
+
+	&.btn-sm {
+		font-size: 0.75em;
+		padding: 0.5em 1em;
+	}
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -0.5em;
+
+	&:not(:last-child) {
+		margin-bottom: 0.5em;
+	}
+
+	[class*="col-"],
+	.col {
+		padding: 0 0.5em;
+		margin-bottom: 0.5em;
+	}
+
+	.col-auto {
+		flex: 0 0 auto;
+	}
+
+	.col {
+		flex-grow: 1;
+		flex-basis: 0;
+	}
+
+	@for $i from 0 through 12 {
+		.col-#{$i} {
+			flex: 0 0 #{(($i / 12) * 100) + '%'};
+			max-width: #{(($i / 12) * 100) + '%'};
+		}
+
+		.col-offset-#{$i} {
+			margin-left: #{(($i / 12) * 100) + '%'};
+		}
+
+		@media (max-width: $bp-small) {
+			.col-sm-#{$i} {
+				flex: 0 0 #{(($i / 12) * 100) + '%'};
+				max-width: #{(($i / 12) * 100) + '%'};
+			}
+
+			.col-sm-offset-#{$i} {
+				margin-left: #{(($i / 12) * 100) + '%'};
+			}
+		}
+
+		@media (max-width: $bp-xsmall) {
+			.col-xs-#{$i} {
+				flex: 0 0 #{(($i / 12) * 100) + '%'};
+				max-width: #{(($i / 12) * 100) + '%'};
+			}
+
+			.col-xs-offset-#{$i} {
+				margin-left: #{(($i / 12) * 100) + '%'};
+			}
+		}
+
+		@media (min-width: $bp-small) {
+			.col-md-#{$i} {
+				flex: 0 0 #{(($i / 12) * 100) + '%'};
+				max-width: #{(($i / 12) * 100) + '%'};
+			}
+
+			.col-md-offset-#{$i} {
+				margin-left: #{(($i / 12) * 100) + '%'};
+			}
+		}
+	}
+}
+
+.float-right {
+	float: right;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+nav {
+	display: flex;
+	position: relative;
+	height: $nav-height;
+	background-color: $theme-primary-color;
+	color: $back-color;
+	z-index: 9999;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+
+	.nav-brand {
+		flex: 0 0 auto;
+		line-height: $nav-height;
+		font-size: 1.25em;
+		padding: 0 1em;
+	}
+
+	> .nav-group > .nav-item {
+		line-height: $nav-height;
+	}
+
+	.nav-group {
+		display: flex;
+		flex: 1 1 100%;
+
+		&.nav-right {
+			flex: 0 0 auto;
+		}
+	}
+
+	.nav-link {
+		display: block;
+		padding: 0 1em;
+		transition: background-color ease-in-out 0.25s;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+
+		.fa-caret-down {
+			margin-left: 0.5em;
+		}
+	}
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	border: solid 1px rgba(0, 0, 0, 0.15);
+	background-color: #FFFFFF;
+
+	.card-header,
+	.card-footer {
+		flex: 0 0 auto;
+	}
+
+	.card-header,
+	.card-footer {
+		background-color: rgb(245, 245, 245);
+		padding: 1em;
+	}
+
+	.card-header {
+		border-bottom: solid 1px rgba(0, 0, 0, 0.15);
+
+		> .btn {
+			position: relative;
+			top: 0.5em;
+			margin-top: -0.75em;
+		}
+	}
+
+	.card-footer {
+		border-top: solid 1px rgba(0, 0, 0, 0.15);
+	}
+
+	.card-block {
+		flex: 1 1 100%;
+		padding: 1em;
+	}
+}
+
+.table {
+	width: calc(100% + 1px);
+	border-spacing: 0;
+
+	&.table-striped {
+		tbody > tr:nth-child(odd) > td {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+	}
+
+	thead > tr > th {
+		border-bottom: solid 2px rgba(0, 0, 0, 0.075);
+	}
+
+	tfoot > tr > td {
+		border-top: solid 2px rgba(0, 0, 0, 0.075);
+	}
+
+	thead > tr > th,
+	tfoot > tr > td {
+		padding: 0.75em 1em;
+		text-align: left;
+	}
+
+	tbody > tr {
+		&:not(:last-child) > td {
+			border-bottom: solid 1px rgba(0, 0, 0, 0.05);
+		}
+
+		> td {
+			padding: 0.75em;
+		}
+	}
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-muted {
+	color: #666;
+}
+
+.pagination {
+	display: flex;
+
+	.page-item {
+		flex: 0 0 30px;
+		width: 30px;
+		line-height: 30px;
+		text-align: center;
+		cursor: pointer;
+		border: solid 1px rgba(0, 0, 0, 0.1);
+		font-size: 0.9em;
+		transition: background-color ease-in-out 0.1s;
+
+		&:not(:first-child) {
+			border-left: 0;
+		}
+
+		&:hover:not(.disabled) {
+			background-color: rgba(0, 0, 0, 0.1);
+
+			&.active {
+				background-color: darken($theme-primary-color, 5%);
+			}
+		}
+
+		&:active:not(.disabled) {
+			background-color: rgba(0, 0, 0, 0.15);
+
+			&.active {
+				background-color: darken($theme-primary-color, 15%);
+			}
+		}
+
+		&.disabled {
+			cursor: not-allowed;
+
+			a {
+				pointer-events: none;
+			}
+		}
+
+		&.active {
+			background-color: $theme-primary-color;
+			color: #FEFEFE;
+		}
+	}
+}
+
+.list-group {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	> .list-item {
+		&:not(:last-child) {
+			border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+		}
+	}
+}
+
+@for $i from 1 through length($h-sizes) {
+	h#{$i} {
+		font-size: nth($h-sizes, $i);
+	}
+}
+
+::-webkit-input-placeholder {
+	color: #CCC;
+}

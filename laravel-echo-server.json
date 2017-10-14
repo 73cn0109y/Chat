@@ -1,0 +1,26 @@
+{
+  "authHost": "http://chat.dev/",
+  "authEndpoint": "/broadcasting/auth",
+  "clients": [
+    {
+      "appId": "59e7899908f6853d",
+      "key": "f0afef04868e3c3a4ce5ecacd529fc0a"
+    }
+  ],
+  "database": "redis",
+  "databaseConfig": {
+    "redis": {},
+    "sqlite": {
+      "databasePath": "/database/laravel-echo-server.sqlite"
+    }
+  },
+  "devMode": true,
+  "host": null,
+  "port": "6001",
+  "protocol": "http",
+  "socketio": {},
+  "sslCertPath": "",
+  "sslKeyPath": "",
+  "sslCertChainPath": "",
+  "sslPassphrase": ""
+}
